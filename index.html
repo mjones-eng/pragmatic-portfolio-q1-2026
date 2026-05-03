@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>The Pragmatic Letter — Q1 2026</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-alt: #f7f8fa;
+    --surface-warm: #faf3eb;
+    --border: #e5e7eb;
+    --border-strong: #cbd1d9;
+    --ink: #0a0e1a;
+    --body: #1f2228;
+    --muted: #5a6068;
+    --soft: #9ca3af;
+    --accent: #1F3864;
+    --accent-deep: #0f2547;
+    --accent-light: #eef2f8;
+    --warm: #6b3a1d;
+    --warm-deep: #4a2613;
+
+    --sans: "Helvetica Neue", "Helvetica", "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    --serif: "Charter", "Iowan Old Style", "Source Serif Pro", Georgia, "Times New Roman", serif;
+
+    --topbar-h: 60px;
+    --tabs-h: 52px;
+    --content-max: 1240px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--body);
+    line-height: 1.55;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ─────────────── TOP BAR ─────────────── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--topbar-h);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    transform: translateY(6px);
+    flex-shrink: 0;
+  }
+  .brand-mark svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .brand-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .brand-name span {
+    font-weight: 400;
+    color: var(--muted);
+    margin-left: 8px;
+  }
+  .topbar-meta {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* ─────────────── TABS ─────────────── */
+  .tabs {
+    position: sticky;
+    top: var(--topbar-h);
+    z-index: 49;
+    height: var(--tabs-h);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: stretch;
+    padding: 0 32px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    background: none;
+    border: none;
+    padding: 0 22px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    letter-spacing: 0.005em;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .tab .tab-num {
+    font-size: 11px;
+    color: var(--soft);
+    font-weight: 500;
+  }
+  .tab.active .tab-num { color: var(--accent); }
+
+  /* ─────────────── PANELS ─────────────── */
+  main { background: var(--surface-alt); min-height: calc(100vh - var(--topbar-h) - var(--tabs-h)); }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .panel-head {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 36px 32px 28px;
+  }
+  .panel-head-inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+  }
+  .panel-eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--warm);
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  .panel-title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ink);
+    letter-spacing: -0.018em;
+    margin: 0 0 6px;
+  }
+  .panel-dek {
+    font-size: 16px;
+    color: var(--muted);
+    font-style: italic;
+    margin: 0;
+    font-family: var(--serif);
+  }
+
+  .panel-body {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 36px 32px 80px;
+  }
+
+  /* ─────────────── MEMO LAYOUT (Part I, Part IV) ─────────────── */
+  .memo {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 56px 64px;
+  }
+  .memo p {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.72;
+    color: var(--body);
+    margin: 0 0 18px;
+  }
+  .memo p.lead {
+    font-size: 19px;
+    color: var(--ink);
+    margin-bottom: 22px;
+  }
+  .memo p.dropcap::first-letter {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 1;
+    float: left;
+    padding: 0 11px 0 0;
+    color: var(--accent);
+  }
+  .memo em { font-style: italic; }
+  .memo strong { color: var(--ink); font-weight: 700; }
+
+  .memo-quote {
+    margin: 32px -24px;
+    padding: 24px 28px;
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .memo-quote cite {
+    display: block;
+    font-family: var(--sans);
+    font-style: normal;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+
+  .signoff {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 2px solid var(--accent);
+  }
+  .signoff p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink);
+    margin: 0 0 16px;
+  }
+  .sig-name {
+    display: block;
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 24px;
+  }
+  .sig-title {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 700;
+    color: var(--muted);
+    margin-top: 4px;
+    font-style: normal;
+  }
+
+  /* ─────────────── PART II/III: SUMMARY STRIP ─────────────── */
+  .summary-strip {
+    max-width: var(--content-max);
+    margin: 0 auto 28px;
+    padding: 0;
+    display: flex;
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .summary-cell {
+    flex: 1;
+    padding: 18px 22px;
+    border-right: 1px solid var(--border);
+  }
+  .summary-cell:last-child { border-right: none; }
+  .summary-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0 0 4px;
+  }
+  .summary-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    color: var(--muted);
+    margin: 0;
+  }
+  @media (max-width: 720px) {
+    .summary-strip { flex-direction: column; }
+    .summary-cell { border-right: none; border-bottom: 1px solid var(--border); }
+    .summary-cell:last-child { border-bottom: none; }
+  }
+
+  /* ─────────────── CLUSTER NAV (sticky sub-nav) ─────────────── */
+  .cluster-nav {
+    position: sticky;
+    top: calc(var(--topbar-h) + var(--tabs-h));
+    z-index: 48;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    margin: 0 0 32px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .cluster-nav::-webkit-scrollbar { display: none; }
+  .cluster-nav a {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.005em;
+    border-radius: 2px;
+    transition: background 0.12s, color 0.12s;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .cluster-nav a:hover { background: var(--surface-alt); color: var(--ink); }
+  .cluster-nav a .cn-num {
+    font-size: 10px;
+    color: var(--soft);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+  .cluster-nav a:hover .cn-num { color: var(--muted); }
+
+  /* ─────────────── CLUSTER SECTION ─────────────── */
+  .cluster-section {
+    margin: 0 0 56px;
+    scroll-margin-top: calc(var(--topbar-h) + var(--tabs-h) + 80px);
+  }
+  .cluster-header {
+    margin: 0 0 24px;
+    padding: 0 0 16px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .cluster-num {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--warm);
+    font-weight: 700;
+    margin: 0 0 8px;
+    display: block;
+  }
+  .cluster-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.012em;
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+  .cluster-epigraph {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+    max-width: 720px;
+  }
+
+  /* ─────────────── CARD GRID ─────────────── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    align-items: start;
+  }
+  @media (max-width: 920px) { .card-grid { grid-template-columns: 1fr; } }
+
+  /* ─────────────── COMPANY CARD (Part II) ─────────────── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-head { margin: 0 0 16px; }
+  .card-name {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 4px;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+  }
+  .card-name .ticker {
+    display: none;
+  }
+  .card-meta {
+    display: none;
+  }
+  .card-meta--enabled {
+    margin: 12px 0 0;
+    padding: 12px 0 0;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .card-meta .meta-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 3px 0;
+  }
+  .card-meta .meta-label {
+    font-weight: 700;
+    color: var(--ink);
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    flex-shrink: 0;
+    width: 80px;
+  }
+  .card-meta .meta-value {
+    color: var(--body);
+    flex: 1;
+  }
+  .card-meta .megatrend-text {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .card-body {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .card-body p {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--body);
+    margin: 0 0 14px;
+  }
+  .card-body p:last-child { margin-bottom: 0; }
+  .card-body em { font-style: italic; }
+
+  /* Bullet list inside card body — navy panel spanning the card edge to edge */
+  .card-body ul.card-bullets {
+    list-style: none;
+    margin: 18px -28px;
+    padding: 18px 28px;
+    background: #243a5e;
+    color: #fff;
+  }
+  .card-body ul.card-bullets li {
+    position: relative;
+    padding: 5px 0 5px 26px;
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.55;
+    color: #fff;
+  }
+  .card-body ul.card-bullets li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 17px;
+    width: 14px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.65);
+  }
+  .card-body ul.card-bullets li em { font-style: italic; color: #fff; }
+  @media (max-width: 720px) {
+    .card-body ul.card-bullets {
+      margin: 18px -22px;
+      padding: 16px 22px;
+    }
+  }
+
+  /* Bottom-line callout inside card body */
+  .card-callout {
+    margin: 20px 0 0;
+    padding: 14px 18px;
+    background: #ecf3eb;
+    border-left: 3px solid #2d5a3a;
+  }
+  /* Knowledge-gap callout on Part II cards — Pragmatic blue, white type */
+  .knowledge-gap {
+    margin: 16px 0 0;
+    padding: 16px 20px;
+    background: #243a5e;
+  }
+  .knowledge-gap-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0 0 10px;
+  }
+  .knowledge-gap-text {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fff;
+    margin: 0;
+    font-weight: 400;
+  }
+  .card-callout-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #2d5a3a;
+    margin: 0 0 8px;
+  }
+  .card-callout-text {
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    font-weight: 600;
+  }
+
+  /* ─────────────── PART III: EPISODE BAR ─────────────── */
+  .episode-bar {
+    max-width: var(--content-max);
+    margin: 0 auto 24px;
+    background: var(--accent);
+    color: #fff;
+    padding: 16px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .ep-num {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #c8d4e8;
+  }
+  .ep-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.005em;
+  }
+  .ep-title em { font-style: italic; color: #c8d4e8; font-weight: 400; }
+
+  /* ─────────────── PART III: TALLY ─────────────── */
+  .tally-grid {
+    max-width: var(--content-max);
+    margin: 0 auto 28px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 720px) { .tally-grid { grid-template-columns: 1fr; } }
+  .tally-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    padding: 22px 24px;
+  }
+  .tally-card.warm { border-top-color: var(--warm); }
+  .tally-num {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .tally-card.warm .tally-num { color: var(--warm); }
+  .tally-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+  .tally-text {
+    font-family: var(--serif);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .manifesto {
+    max-width: var(--content-max);
+    margin: 0 auto 36px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+  }
+  .manifesto p {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--body);
+    margin: 0 0 14px;
+  }
+  .manifesto p:last-child { margin-bottom: 0; }
+  .manifesto p.lead {
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .manifesto em { font-style: italic; }
+  .manifesto strong { color: var(--ink); font-weight: 700; }
+
+  /* ─────────────── DEMO CARD (Part III) ─────────────── */
+  .demo-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 26px;
+  }
+  .demo-card-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 16px;
+    padding: 0 0 12px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.005em;
+  }
+  .pileon {
+    background: var(--surface-warm);
+    border-left: 3px solid var(--warm);
+    padding: 14px 18px;
+    margin: 0 0 16px;
+  }
+  .pileon-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--warm);
+    margin: 0 0 6px;
+  }
+  .pileon-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0;
+  }
+  .read {
+    margin: 0;
+  }
+  .read-premise {
+    background: #f8eded;
+    border-left: 3px solid #a02020;
+    padding: 14px 18px;
+    margin: 0 0 14px;
+  }
+  .read-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  .read-cap {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.45;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0;
+    padding: 0;
+  }
+  .read-body p {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--body);
+    margin: 0 0 12px;
+  }
+  .read-body p:last-child { margin-bottom: 0; }
+  .read-body em { font-style: italic; }
+
+  /* ─────────────── COLOPHON ─────────────── */
+  .colophon {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 24px 32px 40px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+  }
+  .colophon strong { color: var(--ink); font-weight: 700; }
+
+  /* ─────────────── MOBILE ─────────────── */
+  @media (max-width: 720px) {
+    .topbar { padding: 0 18px; }
+    .tabs { padding: 0 8px; }
+    .tab { padding: 0 14px; font-size: 12px; }
+    .panel-head { padding: 24px 18px 20px; }
+    .panel-title { font-size: 24px; }
+    .panel-body { padding: 24px 18px 60px; }
+    .memo { padding: 32px 24px; }
+    .memo-quote { margin-left: -8px; margin-right: -8px; padding: 18px 22px; font-size: 16px; }
+    .cluster-title { font-size: 20px; }
+    .card { padding: 22px 22px; }
+    .card-name { font-size: 17px; }
+    .card-meta .meta-row { flex-direction: column; gap: 2px; }
+    .card-meta .meta-label { width: auto; }
+    .demo-card { padding: 20px 22px; }
+    .summary-strip { margin-bottom: 20px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════ */
+  /* COLLAPSIBLE CLUSTERS AND CARDS                              */
+  /* ═══════════════════════════════════════════════════════════ */
+
+  .cluster-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin: 0 0 16px;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  .cluster-section .cluster-header {
+    margin: 0;
+    padding: 26px 68px 26px 28px;
+    border-bottom: 0;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .cluster-section .cluster-header:hover { background: var(--surface-alt); }
+  .cluster-section.expanded .cluster-header { border-bottom: 2px solid var(--accent); }
+  .cluster-section .cluster-header .cluster-num,
+  .cluster-section .cluster-header .cluster-title,
+  .cluster-section .cluster-header .cluster-epigraph { pointer-events: none; }
+
+  .cluster-toggle {
+    position: absolute;
+    top: 50%;
+    right: 28px;
+    transform: translateY(-50%);
+    font-size: 32px;
+    font-weight: 200;
+    line-height: 0.8;
+    color: var(--accent);
+    font-family: var(--sans);
+    transition: transform 0.25s ease;
+    user-select: none;
+    pointer-events: none;
+  }
+  .cluster-section.expanded .cluster-toggle { transform: translateY(-50%) rotate(45deg); }
+
+  .cluster-section > .card-grid {
+    display: none;
+    padding: 24px;
+    background: var(--surface-alt);
+  }
+  .cluster-section.expanded > .card-grid { display: grid; }
+
+  /* Card collapsibility (Part I) */
+  .card-head {
+    margin: 0;
+    cursor: pointer;
+    padding-right: 32px;
+    position: relative;
+    transition: opacity 0.15s;
+  }
+  .card-head:hover .card-toggle { color: var(--accent-deep); }
+
+  .card-toggle {
+    position: absolute;
+    top: -2px;
+    right: 0;
+    font-size: 22px;
+    font-weight: 200;
+    line-height: 1;
+    color: var(--accent);
+    font-family: var(--sans);
+    transition: transform 0.25s ease;
+    user-select: none;
+    pointer-events: none;
+  }
+  .card.expanded .card-toggle,
+  .demo-card.expanded .card-toggle { transform: rotate(45deg); }
+
+  .card .card-body { display: none; }
+  .card.expanded .card-body { display: block; }
+
+  /* Demo card collapsibility (Part II) */
+  .demo-card .demo-card-name {
+    cursor: pointer;
+    padding: 0 32px 0 0;
+    margin: 0;
+    border-bottom: 0;
+    position: relative;
+    transition: opacity 0.15s;
+  }
+  .demo-card .demo-card-name:hover .card-toggle { color: var(--accent-deep); }
+  .demo-card.expanded .demo-card-name {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+  }
+
+  .demo-card .pileon,
+  .demo-card .read,
+  .demo-card .knowledge-gap { display: none; }
+  .demo-card.expanded .pileon,
+  .demo-card.expanded .read,
+  .demo-card.expanded .knowledge-gap { display: block; }
+
+  /* ─────────────── PRINT ─────────────── */
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .topbar, .tabs, .cluster-nav { display: none; }
+    .panel { display: block !important; page-break-after: always; }
+    .panel-head, .panel-body { padding: 0.4in; max-width: none; }
+    .memo { padding: 0; border: none; max-width: none; }
+    .card-grid { display: block; }
+    .card, .demo-card { page-break-inside: avoid; margin-bottom: 18px; border: 1px solid #999; }
+    .episode-bar { background: white; color: var(--ink); border: 2px solid var(--accent); }
+    .episode-bar .ep-num, .episode-bar .ep-title em { color: var(--warm); }
+    .episode-bar .ep-title { color: var(--ink); }
+
+    /* Force everything open for print */
+    .cluster-section > .card-grid { display: grid !important; }
+    .card .card-body { display: block !important; }
+    .demo-card .pileon,
+    .demo-card .read,
+    .demo-card .knowledge-gap { display: block !important; }
+    .demo-card .demo-card-name {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .cluster-toggle, .card-toggle { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─────────────── TOP BAR ─────────────── -->
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-name">Pragmatic Capital Management <span>· Pragmatic Portfolio Update</span></span>
+  </div>
+  <div class="topbar-meta">Q1 2026</div>
+</header>
+
+<!-- ─────────────── TABS ─────────────── -->
+<nav class="tabs" role="tablist">
+  <button class="tab active" data-tab="part2" role="tab"><span class="tab-num">PART I</span>The Pragmatic Portfolio</button>
+  <button class="tab" data-tab="part3" role="tab"><span class="tab-num">PART II</span>Wall Street&rsquo;s Mistakes</button>
+</nav>
+
+<main>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- PART I — THE NINETEEN JOURNEYS                              -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="panel active" data-panel="part2">
+    <div class="panel-head">
+      <div class="panel-head-inner">
+        <p class="panel-eyebrow">Part I &nbsp;·&nbsp; Business by Business</p>
+        <h1 class="panel-title">The Pragmatic Portfolio</h1>
+        <p class="panel-dek">Powerful Businesses Monetizing Massive Megatrends</p>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div class="summary-strip">
+        <div class="summary-cell"><p class="summary-num">19</p><p class="summary-label">Businesses</p></div>
+        <div class="summary-cell"><p class="summary-num">5</p><p class="summary-label">Activity Clusters</p></div>
+        <div class="summary-cell"><p class="summary-num">Q4 &rsquo;25</p><p class="summary-label">Reporting Window</p></div>
+        <div class="summary-cell"><p class="summary-num">2026+</p><p class="summary-label">Road Ahead</p></div>
+      </div>
+
+      <nav class="cluster-nav" data-nav="part2">
+        <a href="#p2-c1"><span class="cn-num">I</span>Building the AI Substrate</a>
+        <a href="#p2-c2"><span class="cn-num">II</span>AI Inside the Enterprise</a>
+        <a href="#p2-c3"><span class="cn-num">III</span>Discovery, Decision, Purchase</a>
+        <a href="#p2-c4"><span class="cn-num">IV</span>Everyday Life</a>
+        <a href="#p2-c5"><span class="cn-num">V</span>Cooler Door &amp; Drive-Thru</a>
+      </nav>
+
+      <div class="manifesto">
+        <p class="lead">Each of these nineteen businesses is pursuing an opportunity so large it will take years to seize &mdash; that is what makes the megatrend a megatrend. Size is the given; execution is the question. The work in front of each company is to reach more of the consumers it can serve, convert them into customers, and add so much value that what it sells becomes irreplaceable &mdash; and that is what we study, quarter by quarter.</p>
+      </div>
+
+      <!-- ═════════════════════ CLUSTER I ═════════════════════ -->
+      <section class="cluster-section" id="p2-c1">
+        <div class="cluster-header">
+          <span class="cluster-num">Cluster I &nbsp;·&nbsp; 5 Businesses</span>
+          <h2 class="cluster-title">Building the AI Substrate</h2>
+          <p class="cluster-epigraph">Five businesses physically constructing the chips, foundries, racks, software, and cloud capacity the AI economy runs on top of. The activity is build. The megatrend is a multi-trillion-dollar buildout of compute infrastructure unfolding across this decade.</p>
+        </div>
+
+        <div class="card-grid">
+
+          <!-- ────── NVIDIA ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">NVIDIA <span class="ticker">NVDA</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">The build-out of AI factories &mdash; gigantic, power-hungry data centers whose only product is intelligence.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Every kind of AI buyer &mdash; the largest cloud companies, the leading AI labs, governments, and the makers of self-driving cars and robots &mdash; is running more of its AI on NVIDIA, and Q4 widened the path further.</p>
+              <ul class="card-bullets">
+                <li>The largest cloud companies are on track to spend near $700 billion building data centers in 2026</li>
+                <li>Government orders for NVIDIA systems tripled past $30 billion this year</li>
+                <li>Anthropic committed to use a gigawatt of NVIDIA systems, with NVIDIA investing $10 billion into Anthropic in return</li>
+                <li>Six-year-old NVIDIA chips remain sold out in the cloud at <em>rising</em> rental prices</li>
+              </ul>
+              <p>The five biggest cloud companies, who once defined the AI story, are now only half of NVIDIA's data-center sales &mdash; governments, businesses, and the makers of self-driving cars and robots are the rest. <em>This means NVIDIA's revenue no longer depends on a handful of cloud companies; it now comes from dozens of separate buyers, each on their own buying schedule. And the chips NVIDIA shipped years ago are renting for more in the cloud today, not less &mdash; pricing power that holds for years after each chip ships.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Owning NVIDIA puts us underneath every layer of a multi-trillion-dollar AI buildout &mdash; with a customer base that keeps widening and chips already in the world that keep gaining rental value.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── AMD ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Advanced Micro Devices <span class="ticker">AMD</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">The same AI infrastructure boom &mdash; viewed as a two-horse race the world&rsquo;s hyperscalers actively want to keep that way.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>The demand for AI chips has outrun what NVIDIA alone can supply, so every cloud company, server maker, and AI lab is now ordering from AMD as the credible second source &mdash; and Q4 widened that path.</p>
+              <ul class="card-bullets">
+                <li>Full-year 2025 revenue grew 34% to $34.6 billion</li>
+                <li>Q4 data-center revenue hit a record $5.4 billion, up 39%</li>
+                <li>OpenAI signed a multi-year commitment to buy six gigawatts of AMD AI chips</li>
+                <li>Oracle committed to install tens of thousands of AMD&rsquo;s next-generation MI450 AI chips starting 2026</li>
+              </ul>
+              <p>Cloud companies released more than 500 new AMD-powered server options in 2025; HPE, Dell, and Lenovo now carry over 3,000 AMD-based products in their lineups; HPE and Lenovo signed on to ship Helios, AMD&rsquo;s pre-built AI server. <em>This means AMD is the second seat the largest buyers are budgeting for. And every AI server pairs an AI chip with a standard server CPU &mdash; that is AMD&rsquo;s high-margin EPYC business, earning revenue inside every AI server regardless of whose AI chip ships alongside it.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">AMD is the kind of business we want to own: two compounding markets on different schedules &mdash; a permanent second seat in AI chips, and the standard server CPU market every server already runs on.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── TSMC ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Taiwan Semiconductor <span class="ticker">TSM</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">The world cannot build advanced AI without one factory network in Taiwan &mdash; the chosen manufacturer for almost every leading-edge chip on earth.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Every chip designer working on the most advanced chips on earth &mdash; NVIDIA, AMD, Apple, Broadcom, Qualcomm &mdash; sends its designs to TSMC because no other factory can match TSMC&rsquo;s manufacturing process, and Q4 widened that lead.</p>
+              <ul class="card-bullets">
+                <li>Started mass production on N2 (TSMC&rsquo;s most advanced manufacturing process) at the end of 2025, with even more advanced versions due in late 2026</li>
+                <li>Chips for AI and high-performance computing reached 58% of sales</li>
+                <li>Full-year 2025 revenue grew 36% to $122 billion</li>
+                <li>Management raised its long-range AI-chip growth forecast to mid-to-high 50% annual through 2029</li>
+              </ul>
+              <p>Capital spending steps up to $52&ndash;56 billion in 2026, funding new factories in Arizona, Japan, Germany, and Taiwan &mdash; with three governments subsidizing the construction because no other manufacturer can replace TSMC. <em>This means TSMC is selling factory capacity that customers have already paid to reserve years in advance, into a buyer base with no alternative. And TSMC&rsquo;s manufacturing prices keep rising while customers keep ordering &mdash; pricing power that compounds because there is no second source.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">TSMC is the rare business with no second supplier at the leading edge &mdash; customers commit years in advance, governments fund the factories, manufacturing prices keep rising. We get to own a piece of it.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── COREWEAVE ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">CoreWeave <span class="ticker">CRWV</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">Renting AI supercomputers by the hour &mdash; a new kind of cloud company that exists solely to host the most demanding AI workloads on earth.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>The largest AI labs and cloud companies are signing longer contracts to rent CoreWeave&rsquo;s AI computing capacity, and Q4 stretched both the duration and the dollar value.</p>
+              <ul class="card-bullets">
+                <li>Full-year 2025 revenue grew 168% to $5.1 billion</li>
+                <li>Customers have committed $66.8 billion in future revenue to CoreWeave &mdash; more than 4x what it was a year earlier</li>
+                <li>Average customer commitment lengthened from four years to five</li>
+                <li>2026 guide: $12&ndash;13 billion of revenue on $30&ndash;35 billion of buildout spending</li>
+                <li>NVIDIA invested $2 billion in CoreWeave</li>
+              </ul>
+              <p>CoreWeave&rsquo;s largest customer used to be more than 80% of its contracted backlog; now it&rsquo;s 35%. Mature contracts are already running at profit margins above Wall Street&rsquo;s expectations. <em>This means CoreWeave is not building speculatively &mdash; every dollar of next year&rsquo;s spending is already tied to a signed customer contract, and the loans only release money as new data centers come online. And while chips are still in short supply, electrical power has become the more acute constraint on building new AI computing capacity right now &mdash; CoreWeave already controls about a gigawatt of data centers ready to run today, with three more gigawatts under contract.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">CoreWeave gives us a share in the specialized AI computing capacity the largest AI labs and cloud companies depend on &mdash; backed by NVIDIA, with customers committing years of revenue in advance and data centers already running today.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── ORACLE ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Oracle <span class="ticker">ORCL</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">A 50-year-old database company reinventing itself as the cloud landlord of choice for AI &mdash; particularly for customers who want their existing business data to be the fuel for AI.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>AI labs are training their models on Oracle, large enterprises are replacing SAP and Workday with Oracle Fusion, and Oracle&rsquo;s existing database customers are now running Oracle (and its new AI database and AI data platform) inside whichever cloud they already use &mdash; and Q4 stretched all three engines.</p>
+              <ul class="card-bullets">
+                <li>Contracted future revenue (signed contracts not yet delivered) reached $553 billion by February &mdash; up from $523 billion just three months earlier</li>
+                <li>Cloud infrastructure revenue grew 66% year over year; AI infrastructure revenue grew 243%</li>
+                <li>400 megawatts of new data-center capacity delivered to customers in a single quarter</li>
+                <li>Multicloud (Oracle&rsquo;s database, plus its new AI database and AI data platform, running inside AWS, Azure, and Google Cloud) consumption up 817% across 45 live regions</li>
+                <li>1,000 AI agents now ship inside Fusion (Oracle&rsquo;s enterprise software) at no extra cost; Q4 wins included Lockheed Martin, Memorial Hermann, and a major Wall Street bank</li>
+              </ul>
+              <p>The flagship Abilene, Texas site holds 96,000 of NVIDIA&rsquo;s most advanced chips &mdash; physical scale that until now only AWS, Azure, and Google could match. <em>This means Oracle is now selling AI infrastructure to the same buyers (OpenAI, Meta, NVIDIA themselves) that AWS, Azure, and Google compete for, with a contracted future revenue base larger than any of theirs. And Oracle is the only vendor whose entire AI stack &mdash; database, applications, and computing &mdash; can be deployed inside a single country. For any customer whose data has to stay within those borders, Oracle is the only option that fits.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Owning Oracle gives us a piece of three businesses at once &mdash; AI infrastructure for the labs, Multicloud that delivers Oracle (database plus new AI data platform) to existing customers wherever they already run, and Fusion software replacing legacy systems across major enterprises. The AI infrastructure business alone has built a contracted future revenue base larger than any individual cloud giant&rsquo;s.</p>
+              </aside>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ═════════════════════ CLUSTER II ═════════════════════ -->
+      <section class="cluster-section" id="p2-c2">
+        <div class="cluster-header">
+          <span class="cluster-num">Cluster II &nbsp;·&nbsp; 4 Businesses</span>
+          <h2 class="cluster-title">Putting AI to Work Inside the Enterprise</h2>
+          <p class="cluster-epigraph">Four businesses weaving AI into how large organizations actually operate &mdash; analyzing their data, watching their software run, designing their products, building their applications. The activity is operationalize. The megatrend is the migration of AI from demo to deployment inside the institutions that run the economy.</p>
+        </div>
+
+        <div class="card-grid">
+
+          <!-- ────── PALANTIR ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Palantir <span class="ticker">PLTR</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">Big institutions racing to embed AI into their core operations, on top of their own messy data, in production.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>The largest institutions on earth &mdash; across defense, manufacturing, healthcare, banking, energy, and government &mdash; are running more of their critical operations on Palantir&rsquo;s software, and Q4 broke the company&rsquo;s own bookings record for the second quarter in a row.</p>
+              <ul class="card-bullets">
+                <li>New contracts signed in Q4 totaled a record $4.3 billion &mdash; more than $1.5 billion above Q3&rsquo;s prior record</li>
+                <li>U.S. commercial revenue grew 137% year over year</li>
+                <li>Lear scaled from 100 users on 4 use cases to 16,000 users on 280 in twelve months</li>
+                <li>A healthcare customer signed for $96 million after two boot camps; an $80 million engineering deal closed within a single quarter</li>
+                <li>The U.S. Navy committed up to $448 million for ShipOS, which cut shipbuilding planning from 160 hours to 10 minutes</li>
+              </ul>
+              <p>Customer count grew 65% year over year, and many of the largest contracts are landing within months of a single boot camp &mdash; the intensive working session Palantir uses to prove value on a customer&rsquo;s real data. <em>This means Palantir&rsquo;s growth engine is not its sales force &mdash; CEO Alex Karp himself calls it &lsquo;anemic and declining&rsquo; &mdash; but inbound demand from customers who run a real problem through the software in days and sign multi-million-dollar contracts in weeks. And once they are on the platform, customers expand dramatically &mdash; adding more users and more workflows year after year, often by 10&ndash;100x.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Palantir is the operating layer that lets the largest institutions on earth &mdash; defense agencies, factories, hospitals, banks, governments &mdash; actually run AI on their own messy, sensitive data. Every one of them wants this capability, the demand is among the largest in software, and Palantir is the only platform meeting it at scale. We are fortunate to own a piece of it.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── SNOWFLAKE ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Snowflake <span class="ticker">SNOW</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">Companies want one trusted, governed home for all of their data so AI agents can act on it.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Large enterprises are running more workloads through Snowflake &mdash; analytics queries and now AI agents acting on the same data &mdash; and Q4 broke records for revenue, bookings, and contract size.</p>
+              <ul class="card-bullets">
+                <li>Q4 revenue grew 30% to $1.23 billion</li>
+                <li>Seven contracts above $100 million each closed in Q4 (vs just two a year earlier), including the largest contract in company history at over $400 million</li>
+                <li>Snowflake Intelligence &mdash; the AI that lets anyone query company data in plain English &mdash; reached roughly 2,500 customers, up from 1,200 in Q3</li>
+                <li>AI revenue crossed a $100 million run-rate, a quarter ahead of plan</li>
+                <li>Anthropic and OpenAI each signed $200 million expansions on the platform</li>
+              </ul>
+              <p>Underneath the headline, 9,100 accounts now use AI inside Snowflake every week, and Snowflake added 740 net-new customers in Q4 &mdash; a record. <em>This means Snowflake&rsquo;s revenue is no longer just analytics; it is analytics plus a fast-growing layer of AI agent activity, on a customer base that keeps adding new logos. And because AI agents need a single, governed, audited place to act on enterprise data &mdash; letting them roam across forty separate systems would violate European, healthcare, and state-level data rules &mdash; Snowflake is becoming the default place where AI gets to work on enterprise data.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Snowflake is the rare business we get to own that earns more every time a customer adds more data to the platform or runs more AI on top of it. New logos keep coming, AI work per customer keeps growing, and the leading AI labs run their models directly inside Snowflake.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── DATADOG ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Datadog <span class="ticker">DDOG</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">Software is getting more complex, and someone has to watch it run &mdash; especially now that AI agents are the ones writing and shipping it.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Engineering teams, security teams, and AI coding agents are all using Datadog more, and Q4 was the company&rsquo;s biggest bookings quarter ever.</p>
+              <ul class="card-bullets">
+                <li>Q4 closed a record $1.63 billion in bookings</li>
+                <li>A leading AI foundation-model company consolidated five separate monitoring tools onto Datadog, signing for tens of millions of dollars</li>
+                <li>Another large AI customer expanded its Datadog contract by over $100 million</li>
+                <li>14 of the top 20 AI-native firms now run on Datadog</li>
+                <li>AI coding tools &mdash; Claude Code, Codex, Cursor &mdash; made 11x more queries to Datadog quarter over quarter</li>
+              </ul>
+              <p>Underneath the headline, Datadog&rsquo;s own AI agent (Bits AI SRE) ran investigations for over 2,000 customers in its first full month after going live in December, and LLM Observability customers &mdash; companies using Datadog to monitor their AI workloads &mdash; crossed 1,000. <em>This means Datadog&rsquo;s AI revenue is coming from both directions at once: customers paying Datadog&rsquo;s own AI agents to fix their production systems, and customers paying Datadog to watch the AI workloads they are shipping. And because AI now writes and ships code into production without humans validating every change, continuous monitoring is mandatory rather than optional.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Datadog earns more every time more software runs in production, and we get to share in that flywheel. AI is accelerating the pace of new software, AI-native companies are consolidating their tooling onto Datadog, and AI coding agents themselves are now calling Datadog for production data.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── FIGMA ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Figma <span class="ticker">FIG</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">Design is becoming the differentiator as AI makes building software cheap. Taste, judgment, and system-level specification are where the value moves.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Designers, product managers, engineers, marketers &mdash; and even the frontier AI labs themselves &mdash; are creating more of their work inside Figma, and Q4 widened both the user base and the wallet.</p>
+              <ul class="card-bullets">
+                <li>Q4 revenue grew 40% to $304 million</li>
+                <li>Existing customers spent 36% more than a year earlier (net retention of 136%)</li>
+                <li>67 customers now pay Figma more than $1 million a year, up 68% year over year</li>
+                <li>60% of all Figma Make files in 2025 were created by non-designers (product managers, marketers, engineers)</li>
+                <li>A hybrid pricing model &mdash; seats plus usage credits &mdash; went live in March 2026</li>
+              </ul>
+              <p>Figma Make weekly active users rose 70% in a single quarter, and over half of all customers paying $100K+ a year are now creating in Make weekly. <em>This means AI is widening, not shrinking, Figma&rsquo;s seat base &mdash; non-designers (product managers, marketers, engineers) are joining designers on the platform because Make turns a plain-English prompt into a working prototype. And the frontier AI labs themselves are paying customers &mdash; the companies most expected to commoditize design are using Figma to design how their own products reach end users.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">As AI cheapens the production of software, the scarce work moves from writing code to deciding what to build. Figma is the platform where that scarce work happens at scale, and we own a piece of every dollar that flows through it.</p>
+              </aside>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ═════════════════════ CLUSTER III ═════════════════════ -->
+      <section class="cluster-section" id="p2-c3">
+        <div class="cluster-header">
+          <span class="cluster-num">Cluster III &nbsp;·&nbsp; 4 Businesses</span>
+          <h2 class="cluster-title">Rebuilding Discovery, Decision, and Purchase</h2>
+          <p class="cluster-epigraph">Four businesses rebuilding the layer between people and the things they buy. The activity is rewire how billions of consumers find, evaluate, and transact &mdash; a layer being rewritten in real time as AI becomes the new intermediary between intent and inventory.</p>
+        </div>
+
+        <div class="card-grid">
+
+          <!-- ────── SHOPIFY ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Shopify <span class="ticker">SHOP</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">Shopping is moving into AI chat windows, and the rails underneath have to be rebuilt to handle it.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Merchants of every size &mdash; from new entrepreneurs to General Motors and L&rsquo;Or&eacute;al &mdash; and AI shopping assistants like ChatGPT and Gemini are running more commerce through Shopify, and Q4 was the company&rsquo;s first $3 billion revenue quarter.</p>
+              <ul class="card-bullets">
+                <li>Q4 was the company&rsquo;s first $3 billion revenue quarter, on $124 billion of merchant sales</li>
+                <li>Full-year 2025 revenue grew 30% to $11.6 billion, with $2 billion in free cash flow and a new $2 billion buyback authorized</li>
+                <li>Orders coming from AI shopping assistants grew 15x in 2025</li>
+                <li>Agentic Storefronts &mdash; Shopify&rsquo;s product that lets AI assistants shop a merchant&rsquo;s store &mdash; went live in Q4 for Vuori, Glossier, SPANX, and Steve Madden</li>
+                <li>Pipeline conversations now include General Motors, L&rsquo;Or&eacute;al, Est&eacute;e Lauder, Keurig Dr Pepper, Amer Sports, Coach, Burton, and Sonos</li>
+              </ul>
+              <p>Underneath the headline, Sidekick &mdash; Shopify&rsquo;s in-platform AI that helps merchants run their stores &mdash; has hit nearly 100 million conversations, and the open commerce protocol Shopify co-developed with Google is becoming the standard layer between AI shopping assistants and merchant catalogs. <em>This means the threat that AI shopping would bypass Shopify is being inverted in real time: every AI assistant that wants to sell a product needs structured catalog data, and Shopify already owns the catalog data for roughly 14% of U.S. online retail. And because every transaction earns Shopify both a monthly fee from the merchant and a percentage of the payment processed, more commerce &mdash; whether from new entrepreneurs, enterprise brands, or AI shopping assistants &mdash; directly compounds Shopify&rsquo;s revenue.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Shopify benefits whether commerce flows through traditional storefronts or AI shopping assistants &mdash; the rails are the same, and we own them. As more channels open up, more transactions flow through Shopify&rsquo;s payment infrastructure, and we earn on every one.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── PINTEREST ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Pinterest <span class="ticker">PINS</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">Visual, AI-assisted shopping is replacing keyword search as the way people decide what to buy.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Pinterest&rsquo;s 619 million users are asking more commercial questions of the platform, advertisers are trusting Pinterest&rsquo;s AI to do more of their targeting, and Q4 advanced both even as a tariff-hit retail cohort softened headline revenue.</p>
+              <ul class="card-bullets">
+                <li>619 million monthly users &mdash; over half of them Gen Z, all signed in &mdash; give Pinterest a clean record of what each one likes</li>
+                <li>Pinterest now handles 80 billion searches a month, comparable in volume to the largest AI chatbot, with over half showing commercial intent</li>
+                <li>Performance+ (Pinterest&rsquo;s AI ad-targeting tool) pulled mid-market and SMB ad spend up 12% per month after adoption</li>
+                <li>Q4 revenue grew 14% to $1.319 billion, decelerating from 17% in Q3 because tariff-hit large retailers pulled back</li>
+                <li>Pinterest acquired tvScientific to extend its ad platform onto connected TV</li>
+              </ul>
+              <p>Pinterest&rsquo;s taste graph &mdash; the data Pinterest holds on what every user likes, saves, and clicks &mdash; is its defining asset, and three new in-house AI models trained on that data drove measurable improvements in what users save and what advertisers can target. <em>This means Pinterest is on the right side of a structural shift: visual, AI-assisted discovery is starting to replace keyword search as the default way people find things to buy, and Pinterest already owns the most commercially-oriented preference data on the consumer internet. The Q4 softness is a sales-coverage execution problem, not a platform problem &mdash; Pinterest is rebuilding sales toward mid-market, SMB, and international advertisers after a tariff-hit retail cohort pulled back.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Every save, click, and search on Pinterest builds a data set unique to Pinterest. As AI-assisted shopping displaces keyword search, ad dollars are flowing toward the platforms that hold consumer-intent data &mdash; and we own one of the most powerful.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── APPLOVIN ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">AppLovin <span class="ticker">APP</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">AI-driven advertising is shifting power from human marketers to automated bidding machines &mdash; and from sales floors to neural networks.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Mobile-game studios and now e-commerce brands are letting AppLovin&rsquo;s AI handle more of their ad targeting, signing themselves up through a self-service portal &mdash; and Q4 thickened the proof behind the case.</p>
+              <ul class="card-bullets">
+                <li>Full-year 2025 revenue grew 70% to $5.48 billion at 82% adjusted EBITDA margins</li>
+                <li>Free cash flow hit $3.95 billion &mdash; about 70% of revenue converted to cash</li>
+                <li>E-commerce advertisers ramped their ad spend roughly 50% per week after the October 1 self-service launch</li>
+                <li>Every dollar AppLovin spends acquiring a new advertiser pays back inside 30 days</li>
+                <li>A pilot of 100+ advertisers is using AppLovin&rsquo;s generative AI to auto-build the interactive middle of their ad unit, with video-generation coming next</li>
+              </ul>
+              <p>Underneath the headline, 57% of qualified leads to AppLovin&rsquo;s self-service portal are now signing up and going live, with management driving conversion toward ~100% before opening the platform broadly this year. <em>This means AppLovin is replacing the traditional ad-sales floor with a self-service portal and AI &mdash; acquiring new advertisers by running ads about its platform on Facebook and Google instead of hiring salespeople, with payback economics no human-driven business can match. And the generative AI now auto-building ads is closing a creative-volume gap that has held e-commerce advertisers back: gaming advertisers test tens of thousands of creatives at once, while e-commerce brands have historically run only hundreds. AppLovin is closing that gap with software.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">AppLovin acquires its advertisers without salespeople &mdash; its AI does the targeting, its software handles the onboarding, and now its generative AI builds the ads themselves. As the cost structure shrinks while the advertiser count grows, free cash flow expands at rates no traditional ad business can match. We own a piece of one of the rarest structures in advertising: a global ad business that runs without a sales floor.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── THE TRADE DESK ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">The Trade Desk <span class="ticker">TTD</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">The open internet &mdash; connected TV, podcasts, news, sports, retail media &mdash; is now the largest single advertising market on earth, fragmented across thousands of publishers and growing every quarter.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>From Bayer and IKEA to Nestle and Cheerios, the world&rsquo;s largest brands are trusting Trade Desk&rsquo;s AI to handle more of their ad-buying and locking themselves in with multi-year contracts &mdash; even as Q4 revenue softened with two large advertiser categories pulling back.</p>
+              <ul class="card-bullets">
+                <li>Full-year 2025 revenue reached $2.9 billion at ~45% adjusted EBITDA margins; Q4 grew 14%</li>
+                <li>Joint Business Plans &mdash; multi-year commitments from major advertisers &mdash; now make up over half of revenue, with the forward pipeline more than doubled year over year</li>
+                <li>Kokai (Trade Desk&rsquo;s AI ad-buying platform) reached nearly 100% default usage and delivers 26% lower customer-acquisition cost and 94% higher click-through rates than the prior version</li>
+                <li>Specsavers cut customer-acquisition cost 43%; IKEA dropped acquisition cost 17%; Best Western doubled its booking rate against live sports</li>
+                <li>A new chief operating officer, chief financial officer, and chief revenue officer came in from Google, Amazon, and Meta</li>
+              </ul>
+              <p>Underneath the headline, Q4&rsquo;s deceleration from 17% to 14% growth was concentrated entirely in tariff-hit consumer-packaged-goods and auto advertisers &mdash; strip those two categories out, and growth would have been five points higher. <em>This means the Q4 softness is exogenous (a tariff cycle hitting two specific advertiser categories), not a platform health issue. And in a head-to-head test against Amazon&rsquo;s competing ad platform, Trade Desk reached 70% more households at 30% lower cost &mdash; proof of why brands pick Trade Desk: it owns no ad inventory, so it has no incentive to push them toward any particular site or streaming service.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Most of advertising&rsquo;s biggest businesses &mdash; Google, Meta, Amazon &mdash; sell their own inventory. Trade Desk is the rare platform that has no inventory of its own and exists purely to help buyers spend wisely across every channel. As inventory keeps proliferating, the buyer&rsquo;s need for an independent agent only grows &mdash; and we are partners in the largest such agent in the world.</p>
+              </aside>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ═════════════════════ CLUSTER IV ═════════════════════ -->
+      <section class="cluster-section" id="p2-c4">
+        <div class="cluster-header">
+          <span class="cluster-num">Cluster IV &nbsp;·&nbsp; 3 Businesses</span>
+          <h2 class="cluster-title">Modernizing the Activities of Everyday Life</h2>
+          <p class="cluster-epigraph">Three businesses replacing legacy ways of doing daily things &mdash; learning a language, ordering from a local merchant, running a restaurant &mdash; with modern, AI-enabled platforms. The activity is replace what came before. The megatrend is the long migration of ordinary life from analog and fragmented onto integrated software stacks.</p>
+        </div>
+
+        <div class="card-grid">
+
+          <!-- ────── DUOLINGO ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Duolingo <span class="ticker">DUOL</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">AI tutors are about to make personalized learning available to a billion people for the price of a coffee.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Duolingo&rsquo;s language learners are running more AI-tutored conversations every day, and Q4&rsquo;s 2026 plan invests aggressively to bring that AI tutor to ten times more of them.</p>
+              <ul class="card-bullets">
+                <li>50 million daily users today, with management targeting 100 million by 2028</li>
+                <li>AI video-call practice is moving from the Max tier (9% of subscribers) into the cheaper Super tier &mdash; ten times more learners will get the AI tutor</li>
+                <li>Words spoken per Max subscriber more than doubled in 2025</li>
+                <li>The top nine languages will extend to a Duolingo Score of 130 &mdash; the level needed to work professionally in that language</li>
+                <li>2026 bookings guide: 10&ndash;12% growth, EBITDA margin ~25%, with $400 million authorized for share buybacks</li>
+              </ul>
+              <p>Underneath the 2026 plan, the engagement data is unambiguous: words spoken per Max subscriber more than doubled in 2025 &mdash; a signal that learners want more time with the AI tutor, not less. <em>This is why Duolingo is trading short-term margin to move AI video-call practice from the Max tier (9% of subscribers) into the cheaper Super tier &mdash; putting an AI tutor in the daily routine of ten times more learners. With AI tutoring&rsquo;s cost-to-serve falling below what a human tutor charges, Duolingo can offer the experience at consumer prices and still earn at scale.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Tutoring used to mean a human teacher charging thousands of dollars. Meanwhile, hundreds of millions of people around the world are paying to learn English to unlock economic opportunity. Duolingo brings tutoring to all of them &mdash; cheaper than a human teacher and more personalized than a classroom &mdash; and we own the leading platform doing it at scale.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── DOORDASH ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">DoorDash <span class="ticker">DASH</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">Local commerce &mdash; restaurants, groceries, retail &mdash; is roughly a decade behind digital media in moving onto on-demand delivery platforms.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Consumers are running more of their weekly errands through DoorDash &mdash; food, groceries, retail, pharmacy &mdash; and Q4 added scale across both geography and category.</p>
+              <ul class="card-bullets">
+                <li>DoorDash now operates in 20+ European countries after the Deliveroo acquisition, expected to add ~$200 million of EBITDA in 2026</li>
+                <li>About 30% of monthly users now order non-restaurant categories &mdash; groceries, retail, pharmacy</li>
+                <li>DashMart Fulfillment Services &mdash; where DoorDash takes physical custody of a retailer&rsquo;s inventory and ships it within the hour &mdash; is live with Kroger and CVS</li>
+                <li>The advertising business hit a $1 billion annual revenue run-rate, faster than any ad business in history</li>
+                <li>The 2026 investment plan includes a single global technology platform, DoorDash Dot (autonomous delivery), deeper merchant software, and direct-channel e-commerce</li>
+              </ul>
+              <p>Underneath the headline, DoorDash is no longer a delivery company &mdash; it is an integrated platform: consumer app, merchant software, ad inventory, and physical fulfillment for retailers. <em>This is what the 2026 spending agenda buys: the integration of these layers into one operating system for local commerce. Growth is coming from two directions at once &mdash; more users every quarter, and more dollars per order. Grocery is the biggest order-size lever: DoorDash&rsquo;s average grocery order is roughly $50, half of grocery-incumbent Instacart&rsquo;s ~$100, and closing that gap delivers significant monetization from the existing customer base.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Local commerce &mdash; restaurants, groceries, retail, pharmacy &mdash; sits about a decade behind digital media in moving onto on-demand platforms. DoorDash is the leading consolidator of that migration in the US, and now in Europe. We are owners of the operating system being built for it.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── TOAST ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Toast <span class="ticker">TOST</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">Independent restaurants are moving off a fragmented stack of legacy tools &mdash; separate cash registers, payment processors, payroll vendors, marketing apps &mdash; and onto integrated software platforms that run the whole business.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Restaurants &mdash; from independents to chains like Applebee&rsquo;s and Firehouse Subs &mdash; are running more of their operation on Toast, and 2025 added a record 30,000 net new locations.</p>
+              <ul class="card-bullets">
+                <li>Toast added 30,000 net new restaurant locations in 2025 &mdash; a record, ending the year at 164,000 locations</li>
+                <li>That is roughly 20% of America&rsquo;s small-and-mid-sized restaurants now running on Toast</li>
+                <li>Annualized recurring revenue from software and payments reached $2 billion, on $195 billion of payment volume processed</li>
+                <li>ToastIQ &mdash; Toast&rsquo;s AI assistant for restaurant operators &mdash; went from 25,000 restaurants and 235,000 queries in Q3 to over 8 million queries in Q4, less than four months after launch</li>
+                <li>Q4 marquee wins: Carmine&rsquo;s, Daniel Boulud, Papa Murphy&rsquo;s, Applebee&rsquo;s, Firehouse Subs</li>
+              </ul>
+              <p>Underneath the customer-add record, support is now AI-first: more than half of customer interactions start with an AI agent, 70% never reach a human, and the result is a 3-percentage-point lift in SaaS gross margin. <em>This means AI is doing two things for Toast at once: it is a new product that operators are adopting (ToastIQ), and a cost lever inside Toast itself. And every restaurant sale that runs through the platform earns Toast roughly 1 cent on the dollar &mdash; software subscription and payment processing combined &mdash; so 30,000 new locations and rising spend per restaurant compound the same revenue line.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Toast is replacing a fragmented stack of restaurant tools &mdash; cash registers, payments, payroll vendors, marketing apps, lenders &mdash; with one integrated operating system. As each restaurant gives up its old vendors, those dollars flow to Toast. We own the consolidator.</p>
+              </aside>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ═════════════════════ CLUSTER V ═════════════════════ -->
+      <section class="cluster-section" id="p2-c5">
+        <div class="cluster-header">
+          <span class="cluster-num">Cluster V &nbsp;·&nbsp; 3 Businesses</span>
+          <h2 class="cluster-title">The Reset at the Cooler Door and the Drive-Thru Lane</h2>
+          <p class="cluster-epigraph">Three businesses capturing generational consumer-behavior shifts in food and drink as category winners. The activity is take share where the category is being rebuilt. The megatrend is not AI &mdash; it is younger consumers fundamentally rewriting what they eat, drink, and trust, faster than incumbents can respond.</p>
+        </div>
+
+        <div class="card-grid">
+
+          <!-- ────── DUTCH BROS ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Dutch Bros <span class="ticker">BROS</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">A new generation of drive-thru beverage chains stealing daily-coffee occasions from the legacy national chain through speed, customization, and a high-energy brand.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Dutch Bros&rsquo; 15 million loyalty members are pulling into the drive-thru more often, now ordering breakfast alongside their daily drink, and the chain ended 2025 with a record 1,136 shops on the way to 2,029 by 2029.</p>
+              <ul class="card-bullets">
+                <li>Full-year 2025 revenue grew 28% to $1.64 billion, with $303 million in adjusted EBITDA</li>
+                <li>19 consecutive years of positive same-store sales; average sales per shop hit a record $2.1 million in 2025</li>
+                <li>15 million+ Dutch Rewards members drive 72% of system transactions</li>
+                <li>Hot breakfast is rolling out to ~75% of the fleet through 2026; the early read showed a ~4% comp lift, with both more visits and bigger tickets</li>
+                <li>1,136 shops today, on the way to 2,029 by 2029, with a longer-term path to 7,000</li>
+              </ul>
+              <p>Underneath the headline shop count, capital spent per new shop fell about 30% year over year, and roughly 70% of those shops are company-operated rather than franchised. <em>This means Dutch Bros funds its expansion from operations rather than capital markets, and captures the full economics of each shop rather than collecting royalty fees. And the food rollout converts existing demand into bigger tickets &mdash; the same 15 million loyalty members ordering breakfast alongside their daily drink &mdash; without needing to find new customers.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Younger consumers already pick Dutch Bros over Starbucks in brand-affinity surveys. As Dutch Bros extends from its regional western footprint to a national one, those preferences become daily visits, and we earn from every cup, every breakfast order, every visit through the lane.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── VITAL FARMS ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Vital Farms <span class="ticker">VITL</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">Consumers paying more for food they trust &mdash; humanely raised, transparently sourced &mdash; even in basic grocery categories like eggs and butter.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>16 million U.S. households are reaching for Vital Farms in the supermarket cold case, and 2025 advanced both demand and supply &mdash; brand awareness up to 34%, and a third production line online to meet it.</p>
+              <ul class="card-bullets">
+                <li>Full-year 2025 revenue grew 25% to $759 million; adjusted EBITDA crossed $100 million for the first time at $114 million</li>
+                <li>Aided brand awareness moved from 26% to 34% in a single year &mdash; making Vital Farms the top share gainer in premium shell eggs</li>
+                <li>The third production line at Egg Central Station (Springfield, Missouri) came online in October 2025, lifting capacity to ~$1.2 billion in annual egg revenue</li>
+                <li>A second plant (&lsquo;Vital Crossroads&rsquo;) is under construction in Seymour, Indiana, with two production lines being built simultaneously to add ~$900 million of annual capacity in early 2027</li>
+                <li>The first share repurchase since the IPO was authorized; the company is targeting $2 billion in net revenue by 2030</li>
+              </ul>
+              <p>Underneath the headline numbers, the shift to pasture-raised eggs is being chosen at the cooler door, not forced by regulation: pasture-raised is the gold standard for how a chicken can live, the eggs taste meaningfully better, and consumers pay the premium because they want both. <em>This means demand is driven by preference, not mandate &mdash; and the bird-flu trauma in commodity supply only accelerated what shoppers were already moving toward. Vital Farms is meeting that demand with supply: new production lines in Springfield and Indiana, plus a farmer network that expanded by nearly a third in a single year, all built before the demand catches up.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Demand for Vital Farms eggs exceeds the supply, and consumers are paying a material premium for them. The growth path is straightforward: bring more of those eggs to market. Vital Farms is doing exactly that, and we earn alongside every carton.</p>
+              </aside>
+            </div>
+          </article>
+
+          <!-- ────── CELSIUS ────── -->
+          <article class="card">
+            <header class="card-head">
+              <h3 class="card-name">Celsius Holdings <span class="ticker">CELH</span></h3>
+              <div class="card-meta">
+                <div class="meta-row"><span class="meta-label">Megatrend</span><span class="meta-value megatrend-text">Sugar-free functional energy drinks taking everyday market share from old-line sodas and traditional energy brands &mdash; especially among women and fitness-oriented consumers.</span></div>
+              </div>
+            </header>
+            <div class="card-body">
+              <p>Celsius now sells three energy-drink brands &mdash; Celsius, Alani Nu, and Rockstar &mdash; that together hold ~20% of the U.S. energy-drink market, and Q4 brought all three onto PepsiCo&rsquo;s truck network.</p>
+              <ul class="card-bullets">
+                <li>Full-year 2025 net revenue reached $2.5 billion; trailing 12-month retail sales hit $5 billion by Q3</li>
+                <li>The three brands &mdash; Celsius, Alani Nu, Rockstar &mdash; together hold ~20% of the U.S. energy-drink market in tracked retail</li>
+                <li>Alani Nu (acquired April 2025) grew 99% in Q3 alone</li>
+                <li>Celsius is now PepsiCo&rsquo;s official U.S. Strategic Energy Drink Captain, shaping how the energy section gets laid out at retailers like Walmart, Target, CVS, and Walgreens</li>
+                <li>Alani Nu transitioned into PepsiCo&rsquo;s truck network in December 2025</li>
+              </ul>
+              <p>Underneath the headline numbers, younger consumers are drinking materially less alcohol than the generation before them and substituting toward functional, wellness-coded energy drinks &mdash; and retailers are physically rebuilding cooler doors around that shift. <em>This means the energy-drink category is being remade by demand, not pushed by supply, and Celsius now owns three of its leading brands. The Strategic Energy Drink Captain status with PepsiCo &mdash; the largest beverage distribution network in the country &mdash; gives Celsius authority over how the energy shelf gets laid out at major retailers, turning shelf placement into a compounding advantage.</em></p>
+              <aside class="card-callout">
+                <p class="card-callout-label">The bottom line</p>
+                <p class="card-callout-text">Celsius has assembled three advantages at once: a multi-brand portfolio, the largest beverage distribution network in the country (through PepsiCo), and authority over how the category&rsquo;s shelf is organized. The combination is what makes the position durable, not any one piece. We are owners of the only company with all three.</p>
+              </aside>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- PART III — THIS QUARTER'S EPISODE                           -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="panel" data-panel="part3">
+    <div class="panel-head">
+      <div class="panel-head-inner">
+        <p class="panel-eyebrow">Part II &nbsp;·&nbsp; The Pile-On and the Read</p>
+        <h1 class="panel-title">Wall Street&rsquo;s Mistakes</h1>
+        <p class="panel-dek">Where Wall Street&rsquo;s Lack of Understanding Is on Full Display</p>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div class="manifesto">
+        <p class="lead">We studied every analyst question asked during the nineteen earnings calls. The same observation kept landing: the information that would dissolve each worry is already sitting in plain sight.</p>
+        <p>It is in what management itself just said on the same call. It is in the basic mechanics of how each business actually works &mdash; how its customers pay it, why they stay with it, what it is actually selling them, what makes the business hard to leave.</p>
+        <p>The consensus is supposed to know these businesses. They are paid to know them. That they are still pressing on surface-level worries that fall apart on basic business literacy is the signature of a community that does not actually know the businesses it covers.</p>
+      </div>
+
+      <nav class="cluster-nav" data-nav="part3">
+        <a href="#p3-c1"><span class="cn-num">I</span>Building the AI Substrate</a>
+        <a href="#p3-c2"><span class="cn-num">II</span>AI Inside the Enterprise</a>
+        <a href="#p3-c3"><span class="cn-num">III</span>Discovery, Decision, Purchase</a>
+        <a href="#p3-c4"><span class="cn-num">IV</span>Everyday Life</a>
+        <a href="#p3-c5"><span class="cn-num">V</span>Cooler Door &amp; Drive-Thru</a>
+      </nav>
+
+      <!-- ═════════════════════ EPISODE — CLUSTER I ═════════════════════ -->
+      <section class="cluster-section" id="p3-c1">
+        <div class="cluster-header">
+          <span class="cluster-num">Cluster I &nbsp;·&nbsp; 5 Pile-Ons</span>
+          <h2 class="cluster-title">Building the AI Substrate</h2>
+        </div>
+
+        <div class="card-grid">
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">NVIDIA</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Analyst after analyst on the call pressed the same two subjects: whether hyperscalers can keep raising AI infrastructure spending, and whether margins hold through the transition to the Rubin generation. The same two questions ran the prior quarter. The print kept getting bigger; the worry kept getting sharper.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that the entire AI capex cycle is structurally cyclical &mdash; that any one of the five hyperscalers blinking on spending breaks the whole story &mdash; and that the Rubin transition is the moment customers finally push back on premium pricing as AMD and custom ASICs catch up, setting up the cyclical demand drop and margin compression to hit at the same time.</p>
+            </div>
+              <div class="read-body">
+                <p>Both questions assume things that are no longer true. The first assumes the hyperscalers will run out of reasons to keep raising &mdash; but the demand for AI is insatiable, and the NVIDIA chips they buy are throwing off the revenue that funds the next round of buying. They have every economic reason to keep spending, and they have publicly committed to do so. And in any case, the hyperscalers are no longer the whole picture: they now account for only about half of NVIDIA&rsquo;s data-center revenue, with governments, model labs, enterprises, and physical-AI buyers making up the rest. The second assumes NVIDIA&rsquo;s chips depreciate the way ordinary hardware does &mdash; but the prior generation is still sold out at <em>rising</em> prices in the secondary market, which is the opposite of depreciation. Asking whether a single product transition erodes pricing on hardware whose older versions are still appreciating contradicts itself.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that NVIDIA&rsquo;s customers are not buying chips but a nearly two-decade-old software ecosystem (CUDA) that every meaningful AI model on earth is written against, you would not be asking about a single chip transition; you would be asking why anyone thinks switching is even possible.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Advanced Micro Devices</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Five sell-side analysts queued up on the same two questions: whether the next AI chip generation launches on the schedule customers are counting on, and whether operating costs are running ahead of the AI ramp. The same five-analyst pile-on ran a quarter earlier on the same axis.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that AMD&rsquo;s next AI chip slips the way every prior non-NVIDIA launch has slipped &mdash; that operating costs running ahead of AI revenue suddenly become a cash-burn problem when the launch window closes, and that NVIDIA opens the technology gap further while AMD spends to catch up to a target that just keeps moving.</p>
+            </div>
+              <div class="read-body">
+                <p>On the schedule, the pile-on is debating risk AMD has already absorbed: the next-generation chip is in customers&rsquo; hands for testing, two of the largest server makers have publicly committed to ship the systems it goes into, multi-year contracts for the most expensive supporting components are signed, and margins moved up year over year while the ramp was happening &mdash; with management committing publicly that costs will grow slower than revenue. The pieces that could have gone wrong have been removed one by one. On the bigger frame, both worries treat AMD&rsquo;s AI accelerator as the whole company. It isn&rsquo;t. AMD also owns the most successful general-purpose server processor on the market, and that business compounds on its own clock &mdash; independent of any single AI chip cycle. Debating one product launch in isolation ignores that the second business is already won, already profitable, and de-risks the first. The actual position is two markets on two clocks, both moving in AMD&rsquo;s direction.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that the demand for AI chips so far outruns what NVIDIA alone can supply that the hyperscalers are funding AMD into existence simply to get enough chips into their data centers, you would not ask whether AMD&rsquo;s launch lands on schedule; you would understand the customers paying for it cannot afford for it to slip.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Taiwan Semiconductor</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">The analyst block converged on one question: whether the dramatic step-up in capital spending is racing past actual end-customer AI demand. A quarter earlier, the same desks worried capacity wasn&rsquo;t being built fast enough; this quarter they worried it&rsquo;s being built too fast. Same axis of anxiety, sign flipped.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that TSMC is making an irreversible capex bet on faith &mdash; customer pre-pays are not contractual obligations and vanish if AI demand softens &mdash; while the geopolitical tail risk attached to Taiwan creates an asymmetric downside no other name carries: the entire factory base is one event from being stranded.</p>
+            </div>
+              <div class="read-body">
+                <p>The premise is mechanically impossible. A leading-edge fab takes two to three years to build before it produces anything sellable, so almost none of next year&rsquo;s spending can affect next year&rsquo;s revenue &mdash; the spend is funding capacity two and three years out, against contracts customers have already signed. The same analysts argued the opposite worry, that capacity wasn&rsquo;t being built fast enough, exactly one quarter earlier, with no new information about the underlying business between the two calls. Same axis, sign flipped. The worry is rotating; the picture is not.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that TSMC&rsquo;s customers reserve and pre-pay for factory capacity years before construction even begins &mdash; the demand commits to TSMC first, and the factories follow &mdash; you would not ask whether the spending is racing ahead of the demand.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">CoreWeave</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Analysts on the call piled on two related questions: when the heavy infrastructure spending starts generating cash, and whether the contracted backlog is as durable as claimed given customer concentration and rapid hardware turnover. Both deepened from a quarter earlier.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that CoreWeave is a single-bet, highly-levered company &mdash; one major customer renegotiating breaks the financing model, hardware lapped midcycle creates a write-down problem, and the elegant capital structure that works in a strong cycle becomes a trap when the AI compute cycle finally turns.</p>
+            </div>
+              <div class="read-body">
+                <p>Both worries assume the buildout is speculative and the customers are about to flee. Neither is true. The spending is contractually matched &mdash; capital deploys only as data centers come online against demand already signed for &mdash; so &lsquo;when does it generate cash&rsquo; is a question the contract structure has already answered. And customers are doing the opposite of fleeing: average commitments lengthened from four years to five at exactly the moment the consensus is warning about obsolescence. The bear case has been falsified for two consecutive quarters; the consensus simply hasn&rsquo;t updated.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that the demand for AI computing so far outruns what the major clouds can deliver that the largest AI labs are signing five-year contracts with CoreWeave just to secure tens of thousands of chips and the power to run them, you would not ask whether the largest customers are about to leave; there is nowhere else with the capacity for them to go.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Oracle</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">The sell-side converged on two questions: whether the AI infrastructure buildout actually clears Oracle&rsquo;s elevated cost of capital, and whether autonomous AI agents end up making the high-margin enterprise applications business obsolete.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that Oracle has bet the balance sheet on AI infrastructure whose unit economics don&rsquo;t clear the cost of capital &mdash; borrowing at six to earn four &mdash; while AI agents quietly hollow out the high-margin Fusion business by doing the work the applications used to do, leaving Oracle structurally lower-margin in both engines at once.</p>
+            </div>
+              <div class="read-body">
+                <p>The first worry runs a simple arithmetic question that the disclosed unit economics close: the margin on already-delivered AI capacity came in above guidance, and the largest pipeline of new contracts uses a structure where the customer supplies the hardware. The second runs the cause-and-effect backwards. Data has gravity. It sits where it has always sat &mdash; inside the systems of record that run the enterprise &mdash; and it is too large and too tangled to move. The model has to come to the data, not the other way around. Regulation reinforces the same direction, but the underlying physics matter more: even if no rule existed, the data still wouldn&rsquo;t move. The consensus is asking whether AI replaces enterprise applications when the enterprise applications are where the AI has to land.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that the long-term demand for AI compute is measured in trillions of dollars over the next decade &mdash; and that Oracle has already locked in $553 billion of contracted future revenue against it &mdash; you would not be litigating the margin on the earliest data centers being built; you would be asking how any company captures a meaningful share of an opportunity this large.</p>
+            </aside>
+</article>
+
+        </div>
+      </section>
+
+      <!-- ═════════════════════ EPISODE — CLUSTER II ═════════════════════ -->
+      <section class="cluster-section" id="p3-c2">
+        <div class="cluster-header">
+          <span class="cluster-num">Cluster II &nbsp;·&nbsp; 4 Pile-Ons</span>
+          <h2 class="cluster-title">Putting AI to Work Inside the Enterprise</h2>
+        </div>
+
+        <div class="card-grid">
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Palantir</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Wall Street analysts piled on two questions: whether commercial AI growth is genuine or hits a near-term &ldquo;show-me&rdquo; wall, and whether the marquee defense win on a single shipbuilding program extends across the defense industrial base.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that Palantir is at the front-loaded peak of a hype cycle &mdash; that the explosive commercial bookings are early adopters racing in before the rest of the market refuses to follow, and that the marquee defense win is one program in a procurement system that won&rsquo;t actually change &mdash; setting up a sharp growth deceleration that crushes the premium multiple.</p>
+            </div>
+              <div class="read-body">
+                <p>Both questions ask for evidence that has already been delivered. The &lsquo;show-me&rsquo; premise has been answered by two consecutive quarters of all-time-record bookings and triple-digit U.S. commercial growth. The defense-scope premise was named directly by management on the call &mdash; the marquee shipbuilding template applies across fighters, bombers, surface vessels, drones, and munitions. The pile-on is debating a thesis the company has spent two quarters disclosing in plain sight.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood how Palantir actually wins a customer &mdash; through a boot camp where the customer brings its own messy data and watches the platform solve a real problem in days &mdash; you would not ask whether the demand is real; the customer signing the multi-million-dollar contract has already proven it to themselves before signing.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Snowflake</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Analysts on the call pressed two themes: whether the higher growth guide is durable or one-deal flattered, and whether AI consumption costs trigger customer pullback or platform disintermediation by the large AI labs.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that Snowflake&rsquo;s higher growth guide was flattered by a single mega-contract &mdash; underlying growth materially lower &mdash; and that the AI labs renting the platform today have every incentive to build their own data layer and route around it inside two years, leaving consumption growth structurally squeezed.</p>
+            </div>
+              <div class="read-body">
+                <p>Both worries are answered by what management said openly on the same call. The guide was explained &mdash; an existing relationship&rsquo;s run rate plus a thickening of the rest of the book &mdash; so the &lsquo;one-deal flattered&rsquo; framing collapses on the disclosure itself. And the disintermediation premise inverts the actual mechanic: AI agents need a single governed, audited surface to act on, not free run across forty separate systems of record. The labs aren&rsquo;t replacing the platform; they are deployed natively inside it precisely because the alternative is regulatorily impossible.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that Snowflake earns more automatically every time a customer runs more queries or more AI on its own data &mdash; consumption is the business model &mdash; you would not ask whether AI is a threat; AI is the largest new source of consumption on the platform.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Datadog</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">The analyst pile-on landed on two questions: whether AI tools will absorb the company&rsquo;s monitoring software category, and whether the heaviest AI customers drag down overall margins. The disintermediation worry is fresh; a quarter earlier the same desks were focused on the strength of non-AI growth.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that autonomous AI agents are about to collapse the standalone monitoring category &mdash; the same agents writing the code becoming the agents monitoring it &mdash; while the largest AI customers eat Datadog&rsquo;s margin with mega-contracts at custom low rates, compressing the growth-and-margin profile simultaneously.</p>
+            </div>
+              <div class="read-body">
+                <p>Both premises misread the physics of what Datadog actually monitors. Modern application failures involve streaming data many orders of magnitude beyond anything an AI model can read in a single session &mdash; detection has to happen continuously, inside the data flow, by something that is always on. AI agents are <em>calling</em> Datadog (activity from autonomous agents grew tenfold in a single quarter), not replacing it. And the heaviest AI customers aren&rsquo;t dragging margin on a weighted basis: gross margin moved up sequentially. The category isn&rsquo;t being absorbed &mdash; it&rsquo;s becoming mandatory.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that switching monitoring tools means re-instrumenting every service in a codebase &mdash; thousands of files of telemetry rewrites no engineering team will undertake voluntarily &mdash; you would not ask whether AI absorbs the category; you would ask why anyone would replace a system that already works.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Figma</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Sell-side analysts queued up on two subjects: whether AI coding tools collapse the value of design software, and why next year&rsquo;s operating margin steps down sharply. A quarter earlier the same desks were upside-curious about new AI products. The data did not change between quarters; the analyst frame did.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that AI coding tools are about to absorb the early-stage design work entirely &mdash; generating UIs from natural language and skipping the design tool altogether &mdash; while the sharp 2026 margin step-down is Figma quietly conceding that defending against the AI-native rivals will cost far more than the original public-company narrative implied.</p>
+            </div>
+              <div class="read-body">
+                <p>The first premise is contradicted by who Figma&rsquo;s customers actually are. The frontier AI labs themselves are running on the platform &mdash; they are not replacing it. The second was on the record three months earlier as a publicly disclosed planning decision: a usage-based monetization layer turning on partway through the year while AI cost of goods hits a full year. The data did not change between the two calls; the analyst frame did. Same desks, same numbers, opposite conclusion. That is not analysis.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that Figma is the multiplayer canvas where designers, product managers, engineers, and now AI tools all work on the same file at the same time, you would not ask whether AI replaces it; AI needs a shared canvas to render its output, and Figma is the one every team in the company already opens.</p>
+            </aside>
+</article>
+
+        </div>
+      </section>
+
+      <!-- ═════════════════════ EPISODE — CLUSTER III ═════════════════════ -->
+      <section class="cluster-section" id="p3-c3">
+        <div class="cluster-header">
+          <span class="cluster-num">Cluster III &nbsp;·&nbsp; 4 Pile-Ons</span>
+          <h2 class="cluster-title">Rebuilding Discovery, Decision, and Purchase</h2>
+        </div>
+
+        <div class="card-grid">
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Shopify</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Analyst after analyst on the call pressed two questions: whether AI shopping interfaces bypass Shopify&rsquo;s checkout and take rate, and whether agentic commerce is a real growth lane in the year ahead. The same two questions were pressed a quarter earlier.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that AI shopping is the next platform shift in commerce, and that the AI assistants becoming the primary buying interface will route around Shopify&rsquo;s checkout entirely &mdash; capturing the take rate that has driven Shopify&rsquo;s revenue compounding while &lsquo;agentic commerce&rsquo; itself produces more story than transactions.</p>
+            </div>
+              <div class="read-body">
+                <p>The first premise is geographically wrong. Shopify is not bypassed by AI shopping agents &mdash; it is the source the agents are querying. The agents are the front end; Shopify runs the order processing, payments, returns, and post-purchase logic underneath. On the largest competing chat assistant, payments default through Shopify&rsquo;s own checkout, with merchant economics identical to a transaction on the merchant&rsquo;s storefront. The second premise is already observable in the data: AI-driven traffic and orders both up multiple-fold for two consecutive quarters. The growth lane has moved from forecast to fact.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that a merchant&rsquo;s catalog is not a list of products but a live system of record &mdash; inventory levels, pricing, shipping rules, returns, tax, customer history &mdash; that already lives inside Shopify, you would not ask whether AI shopping bypasses Shopify; any agent that wants to actually transact has to plug into that system.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Pinterest</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Analysts piled on two themes: why revenue lags despite record user engagement, and whether the sales-team rebuild can be executed cleanly. The engagement-vs-revenue gap was the marquee Q3 analyst worry, too. It is being pressed again.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that Pinterest&rsquo;s long-running engagement-vs-revenue gap is finally being recognized as structural rather than transitional &mdash; that the platform cannot translate its scale of engagement into the ad dollars the market has been pricing in, and the half-finished sales rebuild is the moment the gap gets repriced.</p>
+            </div>
+              <div class="read-body">
+                <p>The premise that Pinterest&rsquo;s user platform is broken collides with the same call&rsquo;s data &mdash; paid clicks up roughly fivefold over three years, 80 billion monthly searches, more than half with commercial intent, and international growing faster than domestic. The Q4 softness is concentrated entirely in tariff-hit large retailers, which is the cohort Pinterest built first &mdash; a transition issue, not a structural one. The consensus is calling a sales-coverage timing issue a structural break. The two are not the same thing.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that Pinterest&rsquo;s users explicitly tell the platform what they want to buy &mdash; not implying it through clicks but volunteering it through saves and searches &mdash; you would not ask whether the platform is broken; you would ask why advertisers don&rsquo;t pay even more for data the user openly declared.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">AppLovin</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">The sell-side queued up on two questions: whether the new advertising platform&rsquo;s growth is real given limited disclosure, and whether the largest social-media platform can rebuild its pre-privacy auction advantage. Both worries were pressed by analysts a quarter earlier; both came back.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that the entire AppLovin story rests on a single, intentionally under-disclosed e-commerce ad platform &mdash; that when the actual numbers arrive they won&rsquo;t justify the multiple, and that Meta and Google are closing the structural window while the cash-engine gaming business matures past its peak.</p>
+            </div>
+              <div class="read-body">
+                <p>The first premise dies on unit economics. Test dollars pay back inside thirty days, more than half of qualified leads convert to live spend, and a reference advertiser scaled spend roughly twentyfold across two years on the platform. That is observed payback, not narrative &mdash; and it has been disclosed for two consecutive quarters. The second collides with Apple&rsquo;s own terms of service. The rival cannot rebuild a privacy-bypass advantage Apple no longer permits. Both worries collapse on observation.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that advertisers spending on AppLovin make their money back inside thirty days &mdash; payback economics no human-driven ad business has ever matched, with no salesperson on the other end &mdash; you would not ask whether the platform&rsquo;s growth is unverifiable; you would ask why any e-commerce brand would spend its budget anywhere else.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">The Trade Desk</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Analyst after analyst converged on two questions: whether growth re-accelerates with weak packaged goods and auto, and whether the largest cloud-and-retail rival is taking share, with AI changing the game. A near-identical analyst pile-on ran a quarter earlier on category bifurcation and competitive pressure.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that the Q4 deceleration is the early signal of a structural problem &mdash; that AI-native, retail-data-rich rivals like Amazon are building integrated ad platforms that make Trade Desk&rsquo;s independent buy-side model obsolete, and that the premium multiple unwinds as growth steps down to single digits.</p>
+            </div>
+              <div class="read-body">
+                <p>The first concern is exogenous and already identified &mdash; the deceleration is concentrated in tariff-hit categories (packaged goods, auto), with the rest of the book accelerating and a forward contracted pipeline more than doubled in a year. The second collides with a head-to-head test result: Trade Desk reached 70% more unique households at 30% lower cost than the cloud-and-retail rival, with six-times-better campaign results. Independence is the product. A buyer in an oversupplied auction does not pick the bidder owned by the seller.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that an advertiser cannot trust an ad platform that also owns the inventory being auctioned &mdash; because the auctioneer&rsquo;s incentives bend toward selling its own boxes &mdash; you would not ask whether the cloud-and-retail rival is taking share; you would ask why any sophisticated advertiser would let the seller of inventory also make their buying decisions.</p>
+            </aside>
+</article>
+
+        </div>
+      </section>
+
+      <!-- ═════════════════════ EPISODE — CLUSTER IV ═════════════════════ -->
+      <section class="cluster-section" id="p3-c4">
+        <div class="cluster-header">
+          <span class="cluster-num">Cluster IV &nbsp;·&nbsp; 3 Pile-Ons</span>
+          <h2 class="cluster-title">Modernizing the Activities of Everyday Life</h2>
+        </div>
+
+        <div class="card-grid">
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Duolingo</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Analysts on the call piled on two worries: whether user growth is permanently slowing, and whether moving the flagship AI feature to a cheaper tier crushes revenue. The same two worries pressed the same desks a quarter earlier &mdash; with no new data between calls to justify the persistence.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that Duolingo&rsquo;s growth engine has hit saturation in its core markets and that management is now voluntarily collapsing its own pricing power &mdash; moving the flagship AI feature into a cheaper tier &mdash; because the standalone AI cannot justify the price the company had been charging for it.</p>
+            </div>
+              <div class="read-body">
+                <p>Both questions assume Duolingo is on the defensive. It is not. The deceleration was a deliberate management choice &mdash; friction-based monetization removed, prioritizing user growth &mdash; announced and explained by Luis von Ahn a quarter earlier. Penetration in even the most-engaged countries is in the low single digits, so saturation is not the issue. And the premise that a tier change hands away pricing power assumes AI is the moat. The moat is the engagement engine, the daily habit, and 85% global share of language-learning users. AI is one feature riding on top of all of that.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that Duolingo&rsquo;s fifty million daily users open the app for the daily streak &mdash; a behavioral habit that has nothing to do with which AI feature lives in which subscription tier &mdash; you would not frame a tier change as a pricing-power crisis; the engagement engine is the moat, and the AI feature is one tool riding on top of it.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">DoorDash</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Analysts pressed two questions on the call: whether elevated 2026 spending is a one-year event or a longer cycle, and whether the largest online retailer disrupts the new non-restaurant categories. A quarter earlier the same desks pressed Tony Xu on the long-cycle margin question. The CEO answered it then. They asked it again now.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that the elevated 2026 spend is DoorDash quietly conceding the margin path requires more capital than promised, and that Amazon is about to take the new non-restaurant categories before DoorDash can consolidate them &mdash; leaving the platform with a permanently lower margin in a market it doesn&rsquo;t get to own.</p>
+            </div>
+              <div class="read-body">
+                <p>The first concern was answered three months earlier on the same record &mdash; the spending shape was disclosed and re-explained, with only one component meaningfully extending into the year after. The second collides with the data on actual category growth: no competitive impact observed, with the new non-restaurant categories growing faster than third-party peers. The pile-on is re-examining trade-offs the same CEO has now disclosed twice on the same axis.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that DoorDash&rsquo;s real asset is a decade-old network of drivers in every neighborhood &mdash; physical infrastructure no balance sheet can simply replicate &mdash; you would not ask whether the largest online retailer disrupts the new categories; you would ask how anyone catches a network already in motion.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Toast</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Sell-side analysts piled on two questions: whether AI lowers the barrier for new entrants in restaurant software, and whether next year is peak investment or the start of a longer cycle. A quarter earlier the same desks were pressing on take-rate mechanics. The worry rotates; the analyst pattern does not.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that AI is collapsing the cost of building restaurant software, and that Toast&rsquo;s heavy 2026 investment plan is a defensive scramble against new entrants who can build the same product at a fraction of the cost &mdash; kicking off a multi-year compression of growth and margin.</p>
+            </div>
+              <div class="read-body">
+                <p>The first premise misreads what Toast actually sells. Toast is not a piece of software &mdash; it is the operating system for a restaurant: hardware on the counter and in the server&rsquo;s hand, payments, payroll, working-capital lending, marketing, an AI assistant, and a hundreds-strong partner ecosystem extending the platform. AI does not commoditize a multi-product platform where two-thirds of new demand arrives inbound. The second premise &mdash; peak investment &mdash; was already mapped on the prior call, with the same agentic targets and the same growth-and-margin framing.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that two-thirds of Toast&rsquo;s new demand arrives inbound &mdash; restaurant operators referring other operators inside their own network &mdash; you would not ask whether AI lowers the barrier for a new entrant; you would ask how a new entrant earns the trust of an industry that hires by reputation.</p>
+            </aside>
+</article>
+
+        </div>
+      </section>
+
+      <!-- ═════════════════════ EPISODE — CLUSTER V ═════════════════════ -->
+      <section class="cluster-section" id="p3-c5">
+        <div class="cluster-header">
+          <span class="cluster-num">Cluster V &nbsp;·&nbsp; 3 Pile-Ons</span>
+          <h2 class="cluster-title">The Reset at the Cooler Door and the Drive-Thru Lane</h2>
+        </div>
+
+        <div class="card-grid">
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Dutch Bros</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Analyst after analyst on the call pressed two questions: whether bigger fast-food chains erode same-store traffic, and whether the food rollout drags shop-level margins. The competitive worry was raised by analysts a quarter earlier with the same answer. It was raised again with the same data still in place.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that the Dutch Bros growth story is breaking down &mdash; that scaled competition is finally taking the traffic, and that the food expansion is destroying margins instead of lifting them.</p>
+            </div>
+              <div class="read-body">
+                <p>The first concern fails nineteen consecutive years of positive same-store sales &mdash; the longest possible record against the worry being raised. A direct head-to-head test of a major chain&rsquo;s energy launch inside one of Dutch Bros&rsquo; home markets left local sales unaffected. The second contradicts the comp lift the company has already disclosed: food delivered roughly 4% same-store uplift in Q3, with both ticket and traffic. Both worries were raised a quarter earlier with the same answers, and the data has not moved.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that the Dutch Bros customer is not buying a coffee but a daily ritual built around the broista, the loyalty app, and a brand identity the customer actively chooses to belong to, you would not ask whether a fast-food chain&rsquo;s energy launch takes the visit; the customer is not pulling into the lane for the same reason.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Vital Farms</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">Analysts on the call converged on two worries: whether premium-egg demand is decelerating, and whether margin compression is structural. The lowered Q4 guide drove the analyst questions, despite the disclosed reasons being entirely on plan.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that the premium-egg moment is fading &mdash; that demand was a peak rather than a trend, and that Vital Farms&rsquo; margin advantage is permanently eroding.</p>
+            </div>
+              <div class="read-body">
+                <p>Both worries misread management&rsquo;s deliberate posture. The lowered Q4 guide reflects a refusal to buy share through aggressive promotion while the category is being flooded with cheaper conventional supply &mdash; and Vital Farms gained share anyway, ranking as the top share-gainer in premium shell eggs. That is the opposite of weakness. The margin level being criticized is the same trajectory communicated at the prior investor day. This is not compression; it is the originally modeled plan, on schedule. The consensus is calling discipline a sign of decay.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that Vital Farms&rsquo; capacity is gated by biology &mdash; chickens, pasture, family-farm onboarding cycles measured in years &mdash; you would not ask whether demand is decelerating; you would ask whether the supply will ever catch up to it.</p>
+            </aside>
+</article>
+
+          <article class="demo-card">
+            <h3 class="demo-card-name">Celsius Holdings</h3>
+            <div class="pileon">
+              <p class="pileon-label">The pile-on</p>
+              <p class="pileon-text">The sell-side piled on two questions: whether expanded shelf space will actually sell through at retail, and whether Q4 borrowed sales from the start of the year. The same two questions ran by the same desks a quarter earlier, when the &ldquo;noisiness&rdquo; was first telegraphed.</p>
+            </div>
+            <div class="read">
+              <div class="read-premise">
+              <p class="read-label">The read</p>
+              <p class="read-cap">Wall Street wants you to worry that Celsius&rsquo;s reported acceleration is artificial &mdash; distributor channel-fill that is about to unwind, with Q4 sales pulled forward from the start of this year.</p>
+            </div>
+              <div class="read-body">
+                <p>The first worry ignores who controls the shelf. Celsius sits inside a single distribution partnership with PepsiCo, the second-largest beverage company in the country, and that partner is now category captain at the major retailers &mdash; meaning shelf gains and demand are matched by the same operator. The second is failing in real time: Q1 scanner data is already tracking double-digit growth, contradicting the load-in hypothesis. The pile-on is pressing the same wound from a quarter earlier without finding any new evidence.</p>
+              </div>
+            </div>
+                      <aside class="knowledge-gap">
+              <p class="knowledge-gap-label">Wall Street&rsquo;s Knowledge Gap</p>
+              <p class="knowledge-gap-text">If you understood that the actual cans purchased by consumers in Q4 grew 12.8% on Celsius and 136% on Alani &mdash; with younger consumers swapping alcohol for functional energy and female consumers entering the category at rising rates &mdash; you would not ask whether the expanded shelf space sells through; demand at the cooler door is already running ahead of the shelf, not chasing it.</p>
+            </aside>
+</article>
+
+        </div>
+      </section>
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="colophon">
+  <strong>Pragmatic Portfolio &nbsp;&middot;&nbsp; Q1 2026 Update</strong><br>
+  Pragmatic Capital Management, LP
+</footer>
+
+<script>
+  (function() {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.panel');
+
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var target = tab.getAttribute('data-tab');
+        tabs.forEach(function(t) { t.classList.toggle('active', t === tab); });
+        panels.forEach(function(p) { p.classList.toggle('active', p.getAttribute('data-panel') === target); });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Smooth scroll for cluster nav anchors — also auto-expands the target cluster
+    document.querySelectorAll('.cluster-nav a').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          if (target.classList.contains('cluster-section')) {
+            target.classList.add('expanded');
+            var hdr = target.querySelector('.cluster-header');
+            if (hdr) hdr.setAttribute('aria-expanded', 'true');
+          }
+          var topbarH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--topbar-h'));
+          var tabsH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tabs-h'));
+          var clusterNavH = a.parentElement.offsetHeight;
+          var y = target.getBoundingClientRect().top + window.pageYOffset - (topbarH + tabsH + clusterNavH + 16);
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ─────────────── COLLAPSIBLES ───────────────
+    // Cluster sections — inject toggle, wire click + keyboard
+    document.querySelectorAll('.cluster-section').forEach(function(section) {
+      var header = section.querySelector('.cluster-header');
+      if (!header) return;
+      var toggle = document.createElement('span');
+      toggle.className = 'cluster-toggle';
+      toggle.textContent = '+';
+      toggle.setAttribute('aria-hidden', 'true');
+      header.appendChild(toggle);
+      header.setAttribute('role', 'button');
+      header.setAttribute('aria-expanded', 'false');
+      header.setAttribute('tabindex', '0');
+      header.addEventListener('click', function() {
+        var on = section.classList.toggle('expanded');
+        header.setAttribute('aria-expanded', on ? 'true' : 'false');
+      });
+      header.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); header.click(); }
+      });
+    });
+
+    // Cards in Part I — inject toggle on card-head
+    document.querySelectorAll('.card').forEach(function(card) {
+      var head = card.querySelector('.card-head');
+      if (!head) return;
+      var toggle = document.createElement('span');
+      toggle.className = 'card-toggle';
+      toggle.textContent = '+';
+      toggle.setAttribute('aria-hidden', 'true');
+      head.appendChild(toggle);
+      head.setAttribute('role', 'button');
+      head.setAttribute('aria-expanded', 'false');
+      head.setAttribute('tabindex', '0');
+      head.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var on = card.classList.toggle('expanded');
+        head.setAttribute('aria-expanded', on ? 'true' : 'false');
+      });
+      head.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); head.click(); }
+      });
+    });
+
+    // Demo cards in Part II — inject toggle on demo-card-name
+    document.querySelectorAll('.demo-card').forEach(function(card) {
+      var name = card.querySelector('.demo-card-name');
+      if (!name) return;
+      var toggle = document.createElement('span');
+      toggle.className = 'card-toggle';
+      toggle.textContent = '+';
+      toggle.setAttribute('aria-hidden', 'true');
+      name.appendChild(toggle);
+      name.setAttribute('role', 'button');
+      name.setAttribute('aria-expanded', 'false');
+      name.setAttribute('tabindex', '0');
+      name.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var on = card.classList.toggle('expanded');
+        name.setAttribute('aria-expanded', on ? 'true' : 'false');
+      });
+      name.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); name.click(); }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
